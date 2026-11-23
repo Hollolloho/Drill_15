@@ -33,8 +33,6 @@ def colide(a, b):
 
     return True
 
-
-
 def clear():
     for layer in world:
         layer.clear()

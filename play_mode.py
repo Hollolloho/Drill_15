@@ -32,7 +32,7 @@ def init():
     boy = Boy()
     grass = Grass()
     balls = [Ball(random.randint(100, 1600-100), 60, 0) for _ in range(30)]
-    zombies = [Zombie() for i in range(4)]
+    zombies = [Zombie() for _ in range(4)]
 
     # 생성된 객체들을 game_world에 등록
     game_world.add_oject(boy)
@@ -40,12 +40,18 @@ def init():
     game_world.add_objects(balls, 1)
     game_world.add_objects(zombies, 1)
 
-    game_world.add_collision_pairs("boy:ball", boy, None)
-    game_world.add_collision_pairs("zombies:ball", zombies, None)
+    game_world.add_collision_pairs('boy:ball', boy, None)
+    game_world.add_collision_pairs('boy:zombie', boy, None)
+        
     # 생성된 객체들의 충돌 관계를 등록
+
+    for zombie in zombies:
+        game_world.add_collision_pairs('zombies:ball', zombie, None)
+        game_world.add_collision_pairs('boy:zombie', None, zombie)
+
     for ball in balls:
         game_world.add_collision_pairs('boy:ball', None, ball)
-        game_world.add_collision_pairs("zombies:ball", None, zombies)
+        game_world.add_collision_pairs('zombies:ball', None, ball)
 
 
 def pause():
@@ -65,6 +71,7 @@ def finish():
 def update():
     game_world.update()
     game_world.handle_collision()
+    
      # .copy()를 사용하여 balls 리스트를 복사한 후 반복합니다. 이렇게 하면 반복 중에 balls 리스트에서 요소를 제거해도 반복이 안전하게 진행됩니다.
     #for ball in balls.copy(): # [:]  <- 이렇게 해도 됨   
      #     if game_world.colide(boy, ball):

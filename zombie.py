@@ -19,7 +19,6 @@ FRAMES_PER_ACTION = 10
 
 MIN_X, MAX_X = 800, 1600  # 좀비가 오가는 구간
 
-
 class Zombie:
     images = None
 
@@ -32,7 +31,8 @@ class Zombie:
     def __init__(self):
         self.load_images()
         self.x, self.y = random.randint(MIN_X, MAX_X), 150
-        self.width, self.height = 200, 200
+        self.width = 200
+        self.height = 200
         self.frame = random.randint(0, 9)
         self.dir = random.choice([-1, 1])
         self.life = 2
@@ -62,4 +62,8 @@ class Zombie:
         if group == 'zombies:ball':
             self.width, self.height = self.width / 2, self.height / 2 
             self.life -= 1
-                
+            if(self.life <= 0):
+                game_world.remove_object(self)
+
+        elif group == 'boy:zombie':
+            
