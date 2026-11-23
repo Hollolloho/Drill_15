@@ -62,6 +62,8 @@ def handle_collision():
                     a.handle_collision(group, b) # group을 넘겨 충돌상황과 함께 a에게 충돌처리를 지시
                     b.handle_collision(group, a) # group을 넘겨 충돌상황과 함께 b에게 충돌처리를 지시
 
+
+
 def remove_collision_object(o):
     for pairs in collision_pairs.values():
         if o in pairs[0]:
@@ -75,4 +77,5 @@ def remove_object(o):
             layer.remove(o)
             remove_collision_object(o)
             return
+        
     raise ValueError('Trying destroy non existing object')

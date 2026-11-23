@@ -41,9 +41,11 @@ def init():
     game_world.add_objects(zombies, 1)
 
     game_world.add_collision_pairs("boy:ball", boy, None)
+    game_world.add_collision_pairs("zombies:ball", zombies, None)
     # 생성된 객체들의 충돌 관계를 등록
     for ball in balls:
         game_world.add_collision_pairs('boy:ball', None, ball)
+        game_world.add_collision_pairs("zombies:ball", None, zombies)
 
 
 
