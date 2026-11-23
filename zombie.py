@@ -35,7 +35,7 @@ class Zombie:
         self.height = 200
         self.frame = random.randint(0, 9)
         self.dir = random.choice([-1, 1])
-        self.life = 2
+        self.life = 1
 
     def update(self):
         dt = game_framework.frame_time
@@ -59,11 +59,15 @@ class Zombie:
         return self.x - 100, self.y - 100, self.x + 100, self.y + 100
 
     def handle_collision(self, group, other):
-        if group == 'zombies:ball':
-            self.width, self.height = self.width / 2, self.height / 2 
-            self.life -= 1
-            if(self.life <= 0):
-                game_world.remove_object(self)
+        if group == 'boy:zombie':
+            game_framework.quit()
 
-        elif group == 'boy:zombie':
-            
+        elif group == 'ball:zombies':
+            if(other.use == True):
+                self.width = self.width / 2
+                self.height = self.height / 2
+                self.life -= 1
+                if(self.lift <= 0):
+                    game_world.remove_object(self)
+            elif(other.use == False):
+                pass

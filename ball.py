@@ -23,7 +23,7 @@ class Ball:
         self.velocity_y = LAUNCH_SPEED_Y
         self.radius = 10.5 if ball_type == 1 else 20.5
         self.stopped = (direction == 0)  # direction 이 0이면 바닥에 놓인 공
-
+        self.use = False
     def update(self):
         if self.stopped:
             return
@@ -45,6 +45,9 @@ class Ball:
     def handle_collision(self, group, other):
         if group == 'boy:ball':
             game_world.remove_object(self) # 스스로를 제거
-
-        if group == 'zombies:ball':
-            game_world.remove_object(self)
+            self.use = True
+        elif group == 'zombies:ball':
+            if(self.use == False):
+                pass
+            else:    
+                game_world.remove_object(self)

@@ -146,6 +146,7 @@ class Boy:
         self.ball_count -= 1
         ball = Ball(self.x + self.face_dir * 40, self.y + 60, self.face_dir,
                     1 if self.item == 'Ball' else 2)
+        
         game_world.add_oject(ball)
 
     def pause(self):
@@ -190,6 +191,5 @@ class Boy:
     def handle_collision(self, group, other):
         if group == 'boy:ball':
             self.ball_count += 1
-
-        if group == 'boy:zombie':
+        elif group == 'boy:zombie':
            game_framework.quit()
