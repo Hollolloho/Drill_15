@@ -48,10 +48,6 @@ def init():
         game_world.add_collision_pairs("zombies:ball", None, zombies)
 
 
-
-
-
-
 def pause():
     boy.pause()
 
